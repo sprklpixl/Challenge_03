@@ -36,3 +36,34 @@ puts "Names of products above $10 with names beginning with C: #{products_above_
 # Total number of products with a low stock quantity (less than 5 in stock)
 low_stock_products = Product.where("stock < ?", 5).count
 puts "Total number of products with low stock (less than 5): #{low_stock_products}"
+
+
+# Adding association to categories table
+
+# Find any product with stock greater than 40
+product = Product.where("stock > ?", 40).first
+
+# Find the name of the category associated with this product
+category_name = product.category.name
+puts "The category name associated with the product is: #{category_name}"
+
+# Find a specific category
+category = Category.find_by(name: "Electronics")
+
+# Use the category to build and persist a new product
+new_product = category.products.build(name: "New Electronic Product", price: 99.99, stock: 50)
+
+if new_product.save
+  puts "New product saved successfully: #{new_product.inspect}"
+else
+  puts "Failed to save new product: #{new_product.errors.full_messages.join(", ")}"
+end
+
+# Find all products associated with this category and priced over $20
+expensive_products = category.products.where("price > ?", 20)
+
+# Output the names and prices of the expensive products
+puts "Expensive products in the Electronics category:"
+expensive_products.each do |product|
+  puts "Product name: #{product.name}, Price: #{product.price}"
+end
