@@ -8,13 +8,13 @@ require_relative 'ar.rb'
 
 # Method One: Create a product in "object space".
 
-new_product = product.new
+new_product = Product.new
 
 # Set the required properties.
 
 new_product.name  = "Product 1"
 new_product.price = "10.99"
-new_product.stock  = "100"
+new_product.stock_quantity  = "100"
 
 # Calling save on the object will persist it to the products table.
 
@@ -31,7 +31,7 @@ puts new_product.inspect
 
 product2 = product.new( name:  "Product 2",
                         price: "23.99",
-                        stock:  "27" )
+                        stock_quantity:  "27" )
 
 # Like the previous example we need to call save to persist the object
 # to the products table.
@@ -42,10 +42,10 @@ product2.save
 
 product3 = product.create( name:  "Product 3",
                           price: "79.44",
-                          stock:  "546" )
+                          stock_quantity:  "546" )
 
 # Let's test the validations we added to the models/product.rb file:
-# validates_presence_of :name, :price, :stock
+# validates_presence_of :name, :price, :stock_quantity
 
 product4 = product.new( name: "Product 4" ) # Purposefully missing the city and email.
 
