@@ -29,7 +29,7 @@ puts new_product.inspect
 
 # This time we set the required properties as key/value arguments of the new method.
 
-product2 = product.new( name:  "Product 2",
+product2 = Product.new( name:  "Product 2",
                         price: "23.99",
                         stock_quantity:  "27" )
 
@@ -40,14 +40,14 @@ product2.save
 
 # Method Three: Create the object and persist it all at once.
 
-product3 = product.create( name:  "Product 3",
+product3 = Product.create( name:  "Product 3",
                           price: "79.44",
                           stock_quantity:  "546" )
 
 # Let's test the validations we added to the models/product.rb file:
 # validates_presence_of :name, :price, :stock_quantity
 
-product4 = product.new( name: "Product 4" ) # Purposefully missing the city and email.
+product4 = Product.new( name: "Product 4" ) # Purposefully missing the city and email.
 
 # Save will return false if any of our validations fail.
 if (product4.save)
